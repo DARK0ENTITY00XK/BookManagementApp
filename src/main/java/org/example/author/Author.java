@@ -1,16 +1,18 @@
 package org.example.author;
 
 public class Author {
+
     private Integer id;
     private String firstName;
-    private String lastName;
+    private String lastNAme;
 
     public Author() {
+
     }
 
-    public Author(String firstName, String lastName) {
+    public Author( String firstName, String lastNAme) {
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.lastNAme = lastNAme;
     }
 
     public Integer getId() {
@@ -29,20 +31,21 @@ public class Author {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastNAme() {
+        return lastNAme;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastNAme(String lastNAme) {
+        this.lastNAme = lastNAme;
     }
 
     @Override
     public String toString() {
         return "Author{" +
-                "FIRST NAME: '" + firstName + '\'' +
-                ", LAST NAME: '" + lastName + '\'' +
+                ", ID: '" + id + '\'' +
+                ", FIRST NAME: '" + firstName + '\'' +
+                ", LAST NAME: '" + lastNAme + '\'' +
                 '}';
     }
-}
 
+}
