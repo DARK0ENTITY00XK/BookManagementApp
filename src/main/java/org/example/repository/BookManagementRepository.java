@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public interface BookManagementRepository<T> {
 
@@ -9,6 +10,8 @@ public interface BookManagementRepository<T> {
     void createTable() throws SQLException;
 
     void showAll() throws SQLException;
+
+    Optional<T> getById(int id) throws SQLException;
 
     void insert(T t) throws SQLException;
 

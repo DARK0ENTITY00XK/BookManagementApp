@@ -5,13 +5,25 @@ import org.example.repository.BookManagementRepository;
 import org.example.repository.impl.AuthorRepository;
 
 import java.sql.SQLException;
+import java.util.Optional;
+
+import static org.example.BaseConn.establishConn;
 
 class MainApp {
     public static void main(String[] args) {
 
-        BookManagementRepository<Author> authorRepository = new AuthorRepository();
         try {
-            authorRepository.insert(new Author("Creanga", "Ion"));
+            BookManagementRepository<Author> authorRepository = new AuthorRepository(establishConn());
+//            authorRepository.createTable();
+//            authorRepository.insert(new Author("Creanga", "Ion"));
+            Optional<Author> optionalAuthor = authorRepository.getById(1);
+
+            if (optionalAuthor.isPresent()) {
+                Author author = optionalAuthor.get();
+                System.out.println(author);
+            } else {
+                // asta ins ca nu a fost gasit
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

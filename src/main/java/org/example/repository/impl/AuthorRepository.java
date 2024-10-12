@@ -5,7 +5,9 @@ import org.example.repository.BookManagementRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class AuthorRepository implements BookManagementRepository<Author> {
 
@@ -30,7 +32,8 @@ public class AuthorRepository implements BookManagementRepository<Author> {
                 + "author_id INTEGER AUTO_INCREMENT, "
                 + "first_name VARCHAR(225), "
                 + "last_name VARCHAR(225), "
-                + "PRIMARY KEY(author_id)";
+                + "PRIMARY KEY(author_id)"
+                + ");";
 
         this.preparedStatement = this.conn.prepareStatement(query);
         this.preparedStatement.executeUpdate();
@@ -42,6 +45,33 @@ public class AuthorRepository implements BookManagementRepository<Author> {
 
         this.preparedStatement = this.conn.prepareStatement(query);
         this.preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public Optional<Author> getById(int id) throws SQLException {
+        String query = "SELECT * FROM author "
+                + "WHERE author_id = ?";
+
+        this.preparedStatement = this.conn.prepareStatement(query); // il preg pt a fi executat
+        preparedStatement.setInt(1, id);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            int author_id = rs.getInt("author_id");
+            String first_name = rs.getString("first_name");
+            String last_name = rs.getString("last_name");
+
+            Author author = new Author();
+            author.setId(author_id);
+            author.setFirstName(first_name);
+            author.setLastName(last_name);
+
+            // punem obiectul author in cutia optional
+            return Optional.of(author);
+        } else {
+            System.out.println("Autorul nu a fost gasit");
+            return Optional.empty();
+        }
     }
 
     @Override

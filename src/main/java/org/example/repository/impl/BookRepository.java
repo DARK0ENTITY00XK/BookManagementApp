@@ -6,6 +6,7 @@ import org.example.repository.BookManagementRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class BookRepository implements BookManagementRepository<Book> {
 
@@ -40,11 +41,28 @@ public class BookRepository implements BookManagementRepository<Book> {
 
     @Override
     public void showAll() throws SQLException {
+        String query = "SELECT * FROM book";
 
+        this.preparedStatement = this.conn.prepareStatement(query);
+        this.preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public Optional<Book> getById(int id) throws SQLException {
+        return Optional.empty();
     }
 
     @Override
     public void insert(Book book) throws SQLException {
+        String query = "INSERT INTO book"
+                + ("(title, author_id, description)")
+                + "VALUES (?,?,?)";
+
+        this.preparedStatement = this.conn.prepareStatement(query);
+        this.preparedStatement.setString(1, book.getTitle());
+        this.preparedStatement.setInt(2, book.getAuthor().getId());
+        this.preparedStatement.setString(3, book.getDescription());
+        this.preparedStatement.executeUpdate();
 
     }
 
