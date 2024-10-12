@@ -4,15 +4,15 @@ public class Author {
 
     private Integer id;
     private String firstName;
-    private String lastNAme;
+    private String lastName;
 
     public Author() {
 
     }
 
-    public Author( String firstName, String lastNAme) {
+    public Author( String firstName, String lastName) {
         this.firstName = firstName;
-        this.lastNAme = lastNAme;
+        this.lastName = lastName;
     }
 
     public Integer getId() {
@@ -32,11 +32,11 @@ public class Author {
     }
 
     public String getLastNAme() {
-        return lastNAme;
+        return lastName;
     }
 
-    public void setLastNAme(String lastNAme) {
-        this.lastNAme = lastNAme;
+    public void setLastName(String lastNAme) {
+        this.lastName = lastNAme;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Author {
         return "Author{" +
                 ", ID: '" + id + '\'' +
                 ", FIRST NAME: '" + firstName + '\'' +
-                ", LAST NAME: '" + lastNAme + '\'' +
+                ", LAST NAME: '" + lastName + '\'' +
                 '}';
     }
 
