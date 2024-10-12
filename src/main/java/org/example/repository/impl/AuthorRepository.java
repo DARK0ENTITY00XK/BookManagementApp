@@ -44,7 +44,20 @@ public class AuthorRepository implements BookManagementRepository<Author> {
         String query = "SELECT * FROM author";
 
         this.preparedStatement = this.conn.prepareStatement(query);
-        this.preparedStatement.executeUpdate();
+
+        ResultSet rs = this.preparedStatement.executeQuery();
+        while (rs.next()) {
+            int author_id = rs.getInt("author_id");
+            String first_name = rs.getString("first_name");
+            String last_name = rs.getString("last_name");
+
+            Author author = new Author();
+            author.setId(author_id);
+            author.setFirstName(first_name);
+            author.setLastName(last_name);
+
+            System.out.println(author);
+        }
     }
 
     @Override
@@ -56,7 +69,7 @@ public class AuthorRepository implements BookManagementRepository<Author> {
         preparedStatement.setInt(1, id);
 
         ResultSet rs = preparedStatement.executeQuery();
-        if (rs.next()) {
+        if (rs.next()) {  // verificam daca exista obiecte in tabel
             int author_id = rs.getInt("author_id");
             String first_name = rs.getString("first_name");
             String last_name = rs.getString("last_name");
@@ -88,7 +101,7 @@ public class AuthorRepository implements BookManagementRepository<Author> {
 
     @Override
     public void deleteById(Integer id) throws SQLException {
-        String query = "DELETE FROM author"
+        String query = "DELETE FROM author "
                 + "WHERE author_id = ?";
 
         this.preparedStatement = this.conn.prepareStatement(query);
@@ -98,8 +111,8 @@ public class AuthorRepository implements BookManagementRepository<Author> {
 
     @Override
     public void updateById(Author author) throws SQLException {
-        String query = "UPDATE author"
-                + "SET first_name = ?, last_name = ?"
+        String query = "UPDATE author "
+                + "SET first_name = ?, last_name = ? "
                 + "WHERE author_id = ?";
 
         this.preparedStatement = this.conn.prepareStatement(query);
