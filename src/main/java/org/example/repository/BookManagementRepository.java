@@ -18,5 +18,4 @@ public interface BookManagementRepository <T>{
     void deleteById(Integer id) throws SQLException;
 
     void updateById( T t) throws SQLException;
-
 }

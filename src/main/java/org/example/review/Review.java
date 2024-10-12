@@ -5,14 +5,14 @@ import org.example.books.Book;
 public class Review {
     private Integer id;
     private Book book;
-    private String score;
+    private Integer score;
     private String comment;
 
 
     public Review() {
     }
 
-    public Review(Book book, String score, String comment) {
+    public Review(Book book,Integer score, String comment) {
         this.book = book;
         this.score = score;
         this.comment = comment;
@@ -34,11 +34,11 @@ public class Review {
         this.book = book;
     }
 
-    public String getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
