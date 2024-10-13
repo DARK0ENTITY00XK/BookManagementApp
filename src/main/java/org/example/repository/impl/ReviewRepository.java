@@ -72,9 +72,7 @@ public class ReviewRepository implements BookManagementRepository<Review> {
             }
 
             System.out.println(review);
-
         }
-
     }
 
     @Override
@@ -113,16 +111,37 @@ public class ReviewRepository implements BookManagementRepository<Review> {
 
     @Override
     public void insert(Review review) throws SQLException {
+        String query = "INSERT INTO review (book_id, score, comment) VALUE(?, ?, ?) ";
+
+        this.preparedStatement = this.conn.prepareStatement(query);
+        this.preparedStatement.setInt(1, review.getBook().getId());
+        this.preparedStatement.setInt(2, review.getScore());
+        this.preparedStatement.setString(3, review.getComment());
+        this.preparedStatement.executeUpdate();
 
     }
 
     @Override
     public void deleteById(Integer id) throws SQLException {
+        String query = "DELETE FROM review "
+                + "WHERE review_id = ? ";
+        this.preparedStatement = this.conn.prepareStatement(query);
+        this.preparedStatement.setInt(1, id);
+        this.preparedStatement.executeUpdate();
 
     }
 
     @Override
     public void updateById(Review review) throws SQLException {
+        String query = "UPDATE review"
+                + "SET book_id = ?, score = ?, comment = ?"
+                + "WHERE review_id = ? ";
 
+        this.preparedStatement = this.conn.prepareStatement(query);
+        this.preparedStatement.setInt(1, review.getBook().getId());
+        this.preparedStatement.setInt(2, review.getScore());
+        this.preparedStatement.setString(3, review.getComment());
+        this.preparedStatement.setInt(4, review.getId());
+        this.preparedStatement.executeUpdate();
     }
 }

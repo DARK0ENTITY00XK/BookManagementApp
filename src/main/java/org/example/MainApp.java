@@ -5,6 +5,8 @@ import org.example.books.Book;
 import org.example.repository.BookManagementRepository;
 import org.example.repository.impl.AuthorRepository;
 import org.example.repository.impl.BookRepository;
+import org.example.repository.impl.ReviewRepository;
+import org.example.review.Review;
 
 import java.sql.SQLException;
 import java.sql.SQLOutput;
@@ -22,9 +24,13 @@ class MainApp {
             Optional<Author> optionalAuthor = authorRepository.getById(2);
             if(optionalAuthor.isPresent()) {
                 Author author = optionalAuthor.get();
+                author.setFirstName("Dandanache");
+                authorRepository.updateById(author);
                // System.out.println(author);
             }
+
             authorRepository.showAll();
+
             BookManagementRepository<Book> bookRepository = new BookRepository(establishConn(), authorRepository);
          //   bookRepository.dropTableIfExist();
           //  bookRepository.createTable();
@@ -43,6 +49,16 @@ class MainApp {
             if(optionalBook.isPresent()) {
                 System.out.println(optionalBook.get());
             }
+
+            BookManagementRepository<Review> reviewRepository = new ReviewRepository(establishConn(), bookRepository);
+          //  reviewRepository.createTable();
+            Review review = new Review();
+            review.setScore(5);
+            review.setComment("Aceasta carte este magnifica! ");
+            review.setBook(optionalBook.get());
+          //  reviewRepository.insert(review);
+            reviewRepository.deleteById(2);
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

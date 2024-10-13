@@ -110,8 +110,6 @@ public class BookRepository implements BookManagementRepository<Book> {
             System.out.println("Cartea nu a fost gasita ");
             return Optional.empty();
         }
-
-
     }
 
     @Override
@@ -142,14 +140,13 @@ public class BookRepository implements BookManagementRepository<Book> {
     public void updateById(Book book) throws SQLException {
         String query = "UPDATE book"
                 + "SET title = ?, author_id = ?, description = ?"
-                + "WHERE book_id = ?";
+                + "WHERE book_id = ? ";
 
         this.preparedStatement = this.conn.prepareStatement(query);
         this.preparedStatement.setString(1, book.getTitle());
         this.preparedStatement.setInt(2, book.getAuthor().getId());
         this.preparedStatement.setString(3, book.getDescription());
         this.preparedStatement.setInt(4, book.getId());
-
+        this.preparedStatement.executeUpdate();
     }
-
 }

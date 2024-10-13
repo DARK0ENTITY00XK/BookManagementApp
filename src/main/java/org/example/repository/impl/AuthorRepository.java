@@ -119,13 +119,14 @@ public class AuthorRepository implements BookManagementRepository <Author>{
     @Override
     public void updateById(Author author) throws SQLException{
         String query = "UPDATE author"
-                + " SET first_mane = ?, last_name = ?"
+                + " SET first_name = ?, last_name = ?"
                 + "WHERE author_id = ?";
 
         this.preparedStatement = this.conn.prepareStatement(query);
         this.preparedStatement.setString(1, author.getFirstName());
         this.preparedStatement.setString(2, author.getLastNAme());
         this.preparedStatement.setInt(3, author.getId());
+        this.preparedStatement.executeUpdate();
 
     }
 }
