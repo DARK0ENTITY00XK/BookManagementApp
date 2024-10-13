@@ -1,7 +1,6 @@
 package org.example.author;
 
 public class Author {
-
     private Integer id;
     private String firstName;
     private String lastName;
@@ -10,7 +9,7 @@ public class Author {
 
     }
 
-    public Author( String firstName, String lastName) {
+    public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -31,12 +30,12 @@ public class Author {
         this.firstName = firstName;
     }
 
-    public String getLastNAme() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastNAme) {
-        this.lastName = lastNAme;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
@@ -47,5 +46,5 @@ public class Author {
                 ", LAST NAME: '" + lastName + '\'' +
                 '}';
     }
-
 }
+
